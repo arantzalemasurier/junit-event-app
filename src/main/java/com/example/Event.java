@@ -15,7 +15,7 @@ public class Event {
     private List<Speaker> speakers = new ArrayList<>();
     private List<Attendee> attendees = new ArrayList<>();
 
-    private EventNotificationService eventNotificationService;
+    private EventNotificationService eventNotificationService; //mock
 
     public Event(){
 
