@@ -15,7 +15,7 @@ public class Event {
     private List<Speaker> speakers = new ArrayList<>();
     private List<Attendee> attendees = new ArrayList<>();
 
-    private EventNotificationService eventNotificationService; //mock
+    private EventNotificationService eventNotificationService; 
 
     public Event(){
 
@@ -31,7 +31,7 @@ public class Event {
     public void addAttendee(Attendee attendee){
         if(attendee == null)
             return;
-
+        
         if (this.getAttendees() == null)
             this.setAttendees(new ArrayList<>());
 
@@ -129,5 +129,6 @@ public class Event {
 
     public void setAttendees(List<Attendee> attendees) {
         this.attendees = attendees;
-    }
+
+	}
 }

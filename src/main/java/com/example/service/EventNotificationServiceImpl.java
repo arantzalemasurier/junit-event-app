@@ -12,7 +12,9 @@ public class EventNotificationServiceImpl implements EventNotificationService {
 
     @Override
     public void announce(Event event) {
-        if (event == null || event.getAttendees() == null || event.getAttendees().isEmpty())
+        if (event == null 
+        		|| event.getAttendees() == null 
+        		|| event.getAttendees().isEmpty())
             return;
 
         for (Attendee attendee : event.getAttendees()) {
@@ -24,7 +26,8 @@ public class EventNotificationServiceImpl implements EventNotificationService {
 
     @Override
     public void confirmAttendance(Event event, Attendee attendee) {
-        if (event == null || attendee == null)
+        if (event == null 
+        		|| attendee == null)
             return;
 
         Notification confirm = new Notification(MSG_CONFIRM);
