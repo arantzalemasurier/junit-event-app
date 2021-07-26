@@ -3,8 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.example</groupId>
-	<artifactId>m2-07-mockito</artifactId>
+	<artifactId>junit-events-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
+	<name>JUnit Events App</name>
+	<description>Project for JUnit and Mockit testing purposes</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,15 +34,14 @@
 			<scope>test</scope>
 		</dependency>
 
-	<!-- https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter -->
-	<dependency>
-	    <groupId>org.mockito</groupId>
-	    <artifactId>mockito-junit-jupiter</artifactId>
-	    <version>3.11.2</version>
-	    <scope>test</scope>
-	</dependency>
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter -->
+		<dependency>
+	  	    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-junit-jupiter</artifactId>
+		    <version>3.11.2</version>
+	 	   <scope>test</scope>
+		</dependency>
 	
-
-
 	</dependencies>
+
 </project>

@@ -1,4 +1,4 @@
-package com.testing;
+package com.testing.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +16,6 @@ import com.example.Event;
 import com.example.EventType;
 import com.example.Notification;
 import com.example.Speaker;
-import com.example.service.EventNotificationService;
 import com.example.service.EventNotificationServiceImpl;
 
 class EventTest {
@@ -80,55 +79,60 @@ class EventTest {
 		assertSame(e.getTitle(), null);
 		assertSame(e.getType(), null);
 		assertEquals(e.getSpeakers().size(), 0);
-		assertEquals(e.getAttendees().size(),0);
+		assertEquals(e.getAttendees().size(),0);		
 	}
-
+	
 	@Test
 	void testAddAttendee() {
 
 		Event eventBefore;
 		Event eventAfter;
-		
-		// Añadir a un asistente a la lista vacia (tercer if)
+				
+		// Añadir a un asistente a la lista vacia
 		assertEquals(e.getAttendees().size(), 0);
 		assertFalse(e.getAttendees().contains(meri));
 		e.addAttendee(meri);
 		assertTrue(e.getAttendees().contains(meri));
 		assertEquals(e.getAttendees().size(), 1);
 
-		// Añadir a un asistente a una lista llena (tercer if)
+		// Añadir a un asistente a una lista llena
 		assertFalse(e.getAttendees().contains(lola));
 		e.addAttendee(lola);
 		assertTrue(e.getAttendees().contains(lola));
 		assertEquals(e.getAttendees().size(), 2);
 
-		// Añadir a un asistente que ya existe a una lista llena (tercer if)
+		// Añadir a un asistente que ya existe a una lista llena
 		assertTrue(e.getAttendees().contains(lola));
 		e.addAttendee(lola);
 		assertTrue(e.getAttendees().contains(lola));
-		assertEquals(e.getAttendees().size(), 2);
+		assertEquals(e.getAttendees().size(), 2);			
 		
-		// Añadir un asistente a la lista nula (segundo if)
+		// Añadir un asistente a la lista nula
 		e.setAttendees(null);
 		e.addAttendee(paco);
 		assertTrue(e.getAttendees().contains(paco));
 		assertEquals(e.getAttendees().size(), 1);
 		
-		// Añadir null a la lista de asistentes (primer if)
+		// Añadir null a la lista de asistentes
 		eventBefore = e;
 		e.addAttendee(null);
 		eventAfter = e;
-		assertEquals(eventBefore, eventAfter); // pendiente de revisar
-		
+		assertEquals(eventBefore, eventAfter); 
 	}
-
+	
 	@Test
 	void testAddAttendees() {
 
 		Event eventBefore;
 		Event eventAfter;
 		
-		// Añadir un grupo a la lista vacia (tercer if)
+		// Añadir null a la lista de asistentes
+		eventBefore = e;
+		e.addAttendees(null);
+		eventAfter = e;
+		assertEquals(eventBefore, eventAfter);
+		
+		// Añadir un grupo a la lista vacia
 		assertEquals(e.getAttendees().size(), 0);
 		assertFalse(e.getAttendees().contains(meri));
 		assertFalse(e.getAttendees().contains(lola));
@@ -137,7 +141,7 @@ class EventTest {
 		assertTrue(e.getAttendees().contains(lola));
 		assertEquals(e.getAttendees().size(), 2);
 
-		// Añadir a un grupo a una lista llena (tercer if)
+		// Añadir a un grupo a una lista llena
 		assertFalse(e.getAttendees().contains(paco));
 		e.addAttendees(grupo2);
 		assertTrue(e.getAttendees().contains(meri));
@@ -145,36 +149,40 @@ class EventTest {
 		assertTrue(e.getAttendees().contains(paco));
 		assertEquals(e.getAttendees().size(), 3);
 		
-		// Añadir un grupo  a la lista nula (segundo if)
+		// Añadir un grupo  a la lista nula
 		e.setAttendees(null);
 		e.addAttendees(grupo2);
 		assertTrue(e.getAttendees().contains(meri));
 		assertTrue(e.getAttendees().contains(paco));
-		assertEquals(e.getAttendees().size(), 2);
-		
-		// Añadir null a la lista de asistentes (primer if)
-		eventBefore = e;
-		e.addAttendees(null);
-		eventAfter = e;
-		assertEquals(eventBefore, eventAfter); // pendiente de revisar
-
-
+		assertEquals(e.getAttendees().size(), 2);		
 	}
-
+	
 	@Test
 	void testRemoveAttendee() {
 		
 		Event eventBefore;
 		Event eventAfter;
 		
-		// Quitar un asistente a la lista vacia (tercer if)
+		// Quitar null a la lista de asistentes
+		eventBefore = e;
+		e.removeAttendee(null);
+		eventAfter = e;
+		assertEquals(eventBefore, eventAfter);
+		
+		// Quitar un asistente a la lista nula
+		e.setAttendees(null);
+		e.removeAttendee(paco);
+		assertFalse(e.getAttendees().contains(paco));
+		assertEquals(e.getAttendees().size(), 0);
+		
+		// Quitar un asistente a la lista vacia
 		assertEquals(e.getAttendees().size(), 0);
 		assertFalse(e.getAttendees().contains(meri));
 		e.removeAttendee(meri);
 		assertFalse(e.getAttendees().contains(meri));
 		assertEquals(e.getAttendees().size(), 0);
 
-		// Quitar un asistente que no existe a una lista llena (tercer if)
+		// Quitar un asistente que no existe a una lista llena
 		e.addAttendees(grupo1);
 		assertEquals(e.getAttendees().size(), 2);
 		assertFalse(e.getAttendees().contains(paco));
@@ -184,34 +192,33 @@ class EventTest {
 		assertTrue(e.getAttendees().contains(lola));
 		assertEquals(e.getAttendees().size(), 2);
 
-		// Quitar un asistente que ya existe a una lista llena (tercer if)
+		// Quitar un asistente que ya existe a una lista llena
 		assertTrue(e.getAttendees().contains(lola));
 		e.removeAttendee(lola);
 		assertFalse(e.getAttendees().contains(lola));
-		assertEquals(e.getAttendees().size(), 1);
-	
-		// Quitar un asistente a la lista nula (segundo if)
-		e.setAttendees(null);
-		e.removeAttendee(paco);
-		assertFalse(e.getAttendees().contains(paco));
-		assertEquals(e.getAttendees().size(), 0);
-		
-		// Quitar null a la lista de asistentes (primer if)
-		eventBefore = e;
-		e.removeAttendee(null);
-		eventAfter = e;
-		assertEquals(eventBefore, eventAfter); // pendiente de revisar
-	
+		assertEquals(e.getAttendees().size(), 1);		
 	}
-
-
+	
 	@Test
 	void testRemoveAttendees() {
 		
 		Event eventBefore;
 		Event eventAfter;
+
+		// Quitar  null a la lista de asistentes
+		eventBefore = e;
+		e.removeAttendees(null);
+		eventAfter = e;
+		assertEquals(eventBefore, eventAfter);
 		
-		// Quitar un grupo a la lista vacia (tercer if)
+		// Quitar un grupo  a la lista nula
+		e.setAttendees(null);
+		e.removeAttendees(grupo2);
+		assertFalse(e.getAttendees().contains(meri));
+		assertFalse(e.getAttendees().contains(paco));
+		assertEquals(e.getAttendees().size(), 0);
+		
+		// Quitar un grupo a la lista vacia
 		assertEquals(e.getAttendees().size(), 0);
 		assertFalse(e.getAttendees().contains(meri));
 		assertFalse(e.getAttendees().contains(lola));
@@ -220,31 +227,16 @@ class EventTest {
 		assertFalse(e.getAttendees().contains(lola));
 		assertEquals(e.getAttendees().size(), 0);
 
-		// Quitar un grupo de una lista llena (tercer if)
+		// Quitar un grupo de una lista llena
 		e.addAttendees(grupo1);
 		assertEquals(e.getAttendees().size(), 2);
 		e.removeAttendees(grupo2);
 		assertEquals(e.getAttendees().size(), 1);
 		assertFalse(e.getAttendees().contains(meri));
 		assertTrue(e.getAttendees().contains(lola));
-		assertFalse(e.getAttendees().contains(paco));
-		
-		// Quitar un grupo  a la lista nula (segundo if)
-		e.setAttendees(null);
-		e.removeAttendees(grupo2);
-		assertFalse(e.getAttendees().contains(meri));
-		assertFalse(e.getAttendees().contains(paco));
-		assertEquals(e.getAttendees().size(), 0);
-		
-		// Quitar  null a la lista de asistentes (primer if)
-		eventBefore = e;
-		e.removeAttendees(null);
-		eventAfter = e;
-		assertEquals(eventBefore, eventAfter);
-
-
+		assertFalse(e.getAttendees().contains(paco));		
 	}
-
+	
 	@Test
 	void testNotifyAssistants() {
 
@@ -256,11 +248,7 @@ class EventTest {
 		assertTrue(isNotification(e,"The next big event is coming!"));
 		
 		e.setAttendees(null);
-		assertEquals(e.getAttendees(), null);		
-		
-		e.notifyAssistants();
-		//assertFalse(isNotification(e,"The next big event is coming!"));		
-		
+		assertEquals(e.getAttendees(), null);				
 	}
 
 	private Boolean isNotification(Event e, String m) {
@@ -297,23 +285,29 @@ class EventTest {
 		// Añadir a un asistente que ya existe a una lista llena 
 		e.addSpeaker(pedro);
 		assertTrue(e.getSpeakers().contains(pedro));
-		// assertEquals(e.getSpeakers().size(), 2); // EL PROGRAMA TIENE UN ERROR añade a un asistente que ya exite
+		// assertEquals(e.getSpeakers().size(), 2);
+		// EL PROGRAMA TIENE UN ERROR añade a un asistente que ya exite
 		
 		// Añadir null a la lista ponentes
 		eventBefore = e;
 		e.addSpeaker(null);
 		eventAfter = e;
-		assertEquals(eventBefore, eventAfter); // pendiente de revisar
-		
+		assertEquals(eventBefore, eventAfter); // pendiente de revisar	
 	}
-
+	
 	@Test
 	void testRemoveSpeaker() {
 		
 		Event eventBefore;
 		Event eventAfter;
 		
-		// Quitar un ponente a la lista vacia (tercer if)
+		// Quitar null a la lista de asistentes (primer if)
+		eventBefore = e;
+		e.removeSpeaker(null);
+		eventAfter = e;
+		assertEquals(eventBefore, eventAfter);
+		
+		// Quitar un ponente a la lista vacia
 		assertEquals(e.getSpeakers().size(), 0);
 		assertFalse(e.getSpeakers().contains(ana));
 		e.removeSpeaker(ana);
@@ -333,11 +327,6 @@ class EventTest {
 		assertFalse(e.getSpeakers().contains(ana));
 		assertEquals(e.getSpeakers().size(),0);
 				
-		// Quitar null a la lista de asistentes (primer if)
-		eventBefore = e;
-		e.removeSpeaker(null);
-		eventAfter = e;
-		assertEquals(eventBefore, eventAfter);
 	}
 
 	@Test
@@ -371,21 +360,23 @@ class EventTest {
 	void testSetType() {
 		e.setType(EventType.MARKETING);
 		assertEquals(e.getType(),EventType.MARKETING);
-		
 	}
 
 	@Test
 	void testGetSpeakers() {
 		e.addSpeaker(ana);
-		assertTrue(e.getSpeakers().contains(ana));
-		
+		assertTrue(e.getSpeakers().contains(ana));		
 	}
 
 	@Test
 	void testSetSpeakers() {
-		//e.setSpeakers(List(ana, nora));
-		//assertEquals(e.getSpeakers(),"ana");
-		
+		List<Speaker> s = new ArrayList<>();
+		s.add(ana);
+		s.add(nora);
+		e.setSpeakers(s);
+		assertTrue(e.getSpeakers().contains(ana));
+		assertTrue(e.getSpeakers().contains(nora));
+		assertFalse(e.getSpeakers().contains(pedro));		
 	}
 
 	@Test
@@ -396,6 +387,13 @@ class EventTest {
 
 	@Test
 	void testSetAttendees() {
-		
+		List<Attendee> a = new ArrayList<>();
+		a.add(meri);
+		a.add(paco);
+		e.setAttendees(a);
+		assertTrue(e.getAttendees().contains(meri));
+		assertTrue(e.getAttendees().contains(paco));
+		assertFalse(e.getAttendees().contains(lola));
 	}
+	
 }

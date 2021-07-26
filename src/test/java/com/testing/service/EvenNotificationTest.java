@@ -50,8 +50,7 @@ class EvenNotificationTest {
 		
 		ana = new Speaker(100L, "Ana", "Sabe un huevo de JUnit");
 		nora = new Speaker(200L, "Nora", "Java");
-		pedro = new Speaker(300L, "Pedro", "JUnit");
-		
+		pedro = new Speaker(300L, "Pedro", "JUnit");	
 	}
 
 	@AfterAll
@@ -82,11 +81,7 @@ class EvenNotificationTest {
 		assertTrue(isNotification(e,"The next big event is coming!"));
 		
 		e.setAttendees(null);
-		assertEquals(e.getAttendees(), null);		
-		
-		en.announce(e);
-		//assertFalse(isNotification(e,"The next big event is coming!"));		
-		
+		assertEquals(e.getAttendees(), null);			
 	}
 
 	private Boolean isNotification(Event e, String m) {
