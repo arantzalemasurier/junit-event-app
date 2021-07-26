@@ -16,7 +16,6 @@ import com.example.Event;
 import com.example.EventType;
 import com.example.Notification;
 import com.example.Speaker;
-import com.example.service.EventNotificationService;
 import com.example.service.EventNotificationServiceImpl;
 
 class EvenNotificationTest {

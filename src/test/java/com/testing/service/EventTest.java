@@ -205,7 +205,7 @@ class EventTest {
 		Event eventBefore;
 		Event eventAfter;
 
-		// Quitar  null a la lista de asistentes
+		// Quitar null a la lista de asistentes
 		eventBefore = e;
 		e.removeAttendees(null);
 		eventAfter = e;
@@ -257,7 +257,7 @@ class EventTest {
 		esta = false;
 		for (Attendee a : e.getAttendees()) {
 			for (Notification n : a.getNotifications()) {
-				esta = esta || n.getMessage().equals(m);
+				esta = esta || n.getMessage().equals(m); // No puedo pasarle la excepción True-True, no se da el caso
 			}
 		}
 		return esta;
@@ -282,17 +282,17 @@ class EventTest {
 		assertTrue(e.getSpeakers().contains(pedro));
 		assertEquals(e.getSpeakers().size(), 2);
 
-		// Añadir a un asistente que ya existe a una lista llena 
+		// Añadir a un ponente que ya existe a una lista llena 
 		e.addSpeaker(pedro);
 		assertTrue(e.getSpeakers().contains(pedro));
 		// assertEquals(e.getSpeakers().size(), 2);
-		// EL PROGRAMA TIENE UN ERROR añade a un asistente que ya exite
+		// EL PROGRAMA TIENE UN ERROR añade a un ponente que ya exite
 		
 		// Añadir null a la lista ponentes
 		eventBefore = e;
 		e.addSpeaker(null);
 		eventAfter = e;
-		assertEquals(eventBefore, eventAfter); // pendiente de revisar	
+		assertEquals(eventBefore, eventAfter);
 	}
 	
 	@Test
@@ -301,7 +301,7 @@ class EventTest {
 		Event eventBefore;
 		Event eventAfter;
 		
-		// Quitar null a la lista de asistentes (primer if)
+		// Quitar null a la lista de asistentes
 		eventBefore = e;
 		e.removeSpeaker(null);
 		eventAfter = e;
@@ -395,5 +395,4 @@ class EventTest {
 		assertTrue(e.getAttendees().contains(paco));
 		assertFalse(e.getAttendees().contains(lola));
 	}
-	
 }
